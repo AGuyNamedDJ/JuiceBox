@@ -1,3 +1,7 @@
+// Basics
+    // The DB Index.js declares our FNs our app will use
+    // Then exports those FNs
+
 // Step 1: Import pg from the dependency from index.js
 const { Client } = require('pg');
 
