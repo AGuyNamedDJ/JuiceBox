@@ -9,6 +9,8 @@
         // Data for us to Manipulate
         // User-facing Data
 
+// Code
+
 // Step 1: Import client from the export index.js
     // You can add all the import FNs here
 const { client,
@@ -21,21 +23,35 @@ getAllUsers,
  // Method: createTables
 async function createTables() {
     try {
+    console.log("Starting to build tables...");
+
       await client.query(`
-  
+      CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        username varchar(255) UNIQUE NOT NULL,
+        password varchar(255) NOT NULL
+      );
       `);
+
+      console.log("Finished building tables!");
     } catch (error) {
-      throw error; // we pass the error up to the function that calls createTables
+        console.error("Error building tables!");
+        throw error; // we pass the error up to the function that calls createTables
     }
   }
 
     // Method: dropTables
 async function dropTables() {
   try {
-    await client.query(`
+    console.log("Starting to drop tables...");
 
+    await client.query(`
+    DROP TABLE IF EXISTS users;
     `);
+
+    console.log("Finished dropping tables!");
   } catch (error) {
+    console.error("Error dropping tables!");
     throw error; // we pass the error up to the function that calls dropTables
   }
 }
@@ -60,16 +76,34 @@ async function testDB() {
   }
   testDB();
 
-  // Last Method: rebuildDB
+  // Method: rebuildDB
   async function rebuildDB() {
-	try {
-		client.connect();
-        await createTables();
-		await dropTables();
-	} catch (error) {
-		console.error(error);
-    } finally {
-        client.end();
-      }
+    try {
+      client.connect();
+  
+      await dropTables();
+      await createTables();
+    } catch (error) {
+      throw error;
     }
-    rebuildDB();
+  }
+
+    // ethod: testDB
+  async function testDB() {
+    try {
+      console.log("Starting to test database...");
+  
+      const users = await getAllUsers();
+      console.log("getAllUsers:", users);
+  
+      console.log("Finished database tests!");
+    } catch (error) {
+      console.error("Error testing database!");
+      throw error;
+    }
+  }
+  
+  rebuildDB()
+  .then(testDB)
+  .catch(console.error)
+  .finally(() => client.end());
