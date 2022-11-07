@@ -9,7 +9,23 @@ const { Client } = require('pg');
 const client = new Client('postgres://localhost:5432/juicebox-dev'); 
 
 // Step 3: Helper Functions
-    // getAllUsers
+
+    // FN: createUser
+async function createUser({ username, password }) {
+    try {
+        const result = await client.query(`
+          INSERT INTO users(username, password)
+          VALUES ($1, $2);
+        `, [username, password]);
+    
+        return result;
+      } catch (error) {
+        throw error;
+      }
+    }
+    
+
+    // FN: getAllUsers
 async function getAllUsers() {
     const { rows } = await client.query(
       `SELECT id, username 
@@ -18,10 +34,12 @@ async function getAllUsers() {
   
     return rows;
   }
-  
+
+
 
 // Step Final: Export our client variable & other FNs
 module.exports = {
     client,
+    createUser,
     getAllUsers,
 }

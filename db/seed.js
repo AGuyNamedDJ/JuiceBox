@@ -15,6 +15,7 @@
     // You can add all the import FNs here
 const {
     client,
+    createUser,
     getAllUsers
   } = require('./index');
 
