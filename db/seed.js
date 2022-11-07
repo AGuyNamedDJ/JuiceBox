@@ -57,18 +57,6 @@ const {
     }
   }
   
-  // Method: rebuildDB
-  async function rebuildDB() {
-    try {
-      client.connect();
-  
-      await dropTables();
-      await createTables();
-    } catch (error) {
-      throw error;
-    }
-  }
-  
     // Method: testTables
   async function testDB() {
     try {
@@ -83,7 +71,37 @@ const {
       throw error;
     }
   }
+
+  // Method: createInitialUsers
+  async function createInitialUsers() {
+    try {
+        const albertTwo = await createUser({ username: 'albert', password: 'imposter_albert' });
+        
+      console.log("Starting to create users...");
   
+      const albert = await createUser({ username: 'albert', password: 'bertie99' });
+  
+      console.log(albert);
+  
+      console.log("Finished creating users!");
+    } catch(error) {
+      console.error("Error creating users!");
+      throw error;
+    }
+  }
+  
+  // Final Method: rebuildDB
+  async function rebuildDB() {
+    try {
+      client.connect();
+  
+      await dropTables();
+      await createTables();
+      await createInitialUsers();
+    } catch (error) {
+      throw error;
+    }
+  }
   
   rebuildDB()
     .then(testDB)
