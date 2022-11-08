@@ -46,7 +46,10 @@ const {
         CREATE TABLE users (
           id SERIAL PRIMARY KEY,
           username varchar(255) UNIQUE NOT NULL,
-          password varchar(255) NOT NULL
+          password varchar(255) NOT NULL,
+          name varchar(255) NOT NULL,
+          location varchar(255) NOT NULL,
+          active boolean DEFAULT true
         );
       `);
   
@@ -73,18 +76,31 @@ const {
   }
 
   // Method: createInitialUsers
-  async function createInitialUsers() {
+  async function createInitialUsers({username, password, name, location}) {
     try {
-        const albertTwo = await createUser({ username: 'albert', password: 'imposter_albert' });
-        
       console.log("Starting to create users...");
   
-      const albert = await createUser({ username: 'albert', password: 'bertie99' });
-  
-      console.log(albert);
+      await createUser({ 
+        username: 'albert', 
+        password: 'bertie99',
+        name: 'Big AL',
+        location: 'Chicago, IL' 
+      });
+      await createUser({ 
+        username: 'sandra', 
+        password: '2sandy4me',
+        name: 'Lil Ole Sandra',
+        location: 'Miami, FL'
+      });
+      await createUser({ 
+        username: 'glamgal',
+        password: 'soglam',
+        name: 'Erica The Great',
+        location: 'Frisco, Tx'
+      });
   
       console.log("Finished creating users!");
-    } catch(error) {
+    } catch (error) {
       console.error("Error creating users!");
       throw error;
     }
