@@ -16,7 +16,8 @@
 const {
     client,
     createUser,
-    getAllUsers
+    getAllUsers,
+    updateUser,
   } = require('./index');
 
 // Step 2: User Methods
@@ -60,14 +61,23 @@ const {
     }
   }
   
-    // Method: testTables
+    // Method: testDB
   async function testDB() {
     try {
       console.log("Starting to test database...");
   
+      console.log("Calling getAllUsers")
       const users = await getAllUsers();
       console.log("getAllUsers:", users);
   
+      console.log("Calling updateUser on users[0]")
+      const updateUserResult = await updateUser(users[0].id, {
+        name: "Newname Sogood",
+        location: "Lesterville, KY"
+      });
+      console.log("Result:", updateUserResult);
+  
+
       console.log("Finished database tests!");
     } catch (error) {
       console.error("Error testing database!");
@@ -76,7 +86,7 @@ const {
   }
 
   // Method: createInitialUsers
-  async function createInitialUsers({username, password, name, location}) {
+  async function createInitialUsers() {
     try {
       console.log("Starting to create users...");
   
