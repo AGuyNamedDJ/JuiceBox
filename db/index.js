@@ -1,11 +1,13 @@
-const { Client } = require('pg') // imports the pg module
+// Basics
+    // The DB Index.js declares our FNs our app will use
+    // Then exports those FNs
+// Step 1: Import pg from the dependency from index.js
+const { Client } = require('pg');
+// Step 2: Create a new pg.Client
+const client = new Client('postgres://localhost:5432/juicebox-dev'); 
+ // Step 3: Helper Functions
 
-const client = new Client('postgres://localhost:5432/juicebox-dev');
-
-/**
- * USER Methods
- */
-
+     // FN: createUser
 async function createUser({ 
   username, 
   password,
@@ -26,6 +28,7 @@ async function createUser({
   }
 }
 
+// FN: updateUser
 async function updateUser(id, fields = {}) {
   // build the set string
   const setString = Object.keys(fields).map(
@@ -51,6 +54,7 @@ async function updateUser(id, fields = {}) {
   }
 }
 
+// FN: getAllUsers
 async function getAllUsers() {
   try {
     const { rows } = await client.query(`
@@ -64,6 +68,7 @@ async function getAllUsers() {
   }
 }
 
+// FN: getUserByID
 async function getUserById(userId) {
   try {
     const { rows: [ user ] } = await client.query(`
@@ -84,10 +89,7 @@ async function getUserById(userId) {
   }
 }
 
-/**
- * POST Methods
- */
-
+// FN: createPost
 async function createPost({
   authorId,
   title,
@@ -158,6 +160,7 @@ async function updatePost(postId, fields = {}) {
   }
 }
 
+// FN: getAllPosts
 async function getAllPosts() {
   try {
     const { rows: postIds } = await client.query(`
@@ -175,6 +178,7 @@ async function getAllPosts() {
   }
 }
 
+// FN: getPostByID
 async function getPostById(postId) {
   try {
     const { rows: [ post ]  } = await client.query(`
@@ -207,6 +211,7 @@ async function getPostById(postId) {
   }
 }
 
+// FN: getPostsByUser
 async function getPostsByUser(userId) {
   try {
     const { rows: postIds } = await client.query(`
@@ -225,6 +230,7 @@ async function getPostsByUser(userId) {
   }
 }
 
+// FN: getPostsByTagName
 async function getPostsByTagName(tagName) {
   try {
     const { rows: postIds } = await client.query(`
@@ -243,10 +249,7 @@ async function getPostsByTagName(tagName) {
   }
 } 
 
-/**
- * TAG Methods
- */
-
+// FN: createTags
 async function createTags(tagList) {
   if (tagList.length === 0) {
     return [ ];
@@ -281,6 +284,7 @@ async function createTags(tagList) {
   }
 }
 
+// FN: createPostTag
 async function createPostTag(postId, tagId) {
   try {
     await client.query(`
@@ -293,6 +297,7 @@ async function createPostTag(postId, tagId) {
   }
 }
 
+// FN: addTagsToPost
 async function addTagsToPost(postId, tagList) {
   try {
     const createPostTagPromises = tagList.map(
@@ -307,6 +312,7 @@ async function addTagsToPost(postId, tagList) {
   }
 }
 
+// FN: getAllTags
 async function getAllTags() {
   try {
     const { rows } = await client.query(`

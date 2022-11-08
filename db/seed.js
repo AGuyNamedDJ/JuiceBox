@@ -1,3 +1,16 @@
+// Basics
+    // The DB Seed.js
+        // Imports our FNs
+        // Build/Rebuild tables
+        // Fill tables w/ starting Data
+    // Check tables for
+        // Correct Definitions
+        // No nwanted Data
+        // Data for us to Manipulate
+        // User-facing Data
+// Code
+// Step 1: Import client from the export index.js
+    // You can add all the import FNs here
 const {  
   client,
   createUser,
@@ -11,6 +24,9 @@ const {
   getPostsByTagName
 } = require('./index');
 
+// Step 2: User Methods
+  
+    // Method: dropTables
 async function dropTables() {
   try {
     console.log("Starting to drop tables...");
@@ -30,6 +46,7 @@ async function dropTables() {
   }
 }
 
+// Method: createTables
 async function createTables() {
   try {
     console.log("Starting to build tables...");
@@ -71,6 +88,7 @@ async function createTables() {
   }
 }
 
+// Method: createInitialUsers
 async function createInitialUsers() {
   try {
     console.log("Starting to create users...");
@@ -101,6 +119,7 @@ async function createInitialUsers() {
   }
 }
 
+// Method: createInitialPosts
 async function createInitialPosts() {
   try {
     const [albert, sandra, glamgal] = await getAllUsers();
@@ -133,6 +152,7 @@ async function createInitialPosts() {
   }
 }
 
+// Method: rebuildDB
 async function rebuildDB() {
   try {
     client.connect();
@@ -147,6 +167,7 @@ async function rebuildDB() {
   }
 }
 
+// Method: testDB
 async function testDB() {
   try {
     console.log("Starting to test database...");
