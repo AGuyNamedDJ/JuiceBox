@@ -10,7 +10,9 @@ const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
 const { JWT_SECRET } = process.env;
 
-// set `req.user` if possible; MIddleware read JWT
+
+// JWT Middleware
+// set `req.user` if possible; Middleware read JWT
 apiRouter.use(async (req, res, next) => {
     const prefix = 'Bearer ';
     const auth = req.header('Authorization');
@@ -40,8 +42,6 @@ apiRouter.use(async (req, res, next) => {
       });
     }
   });
-
-  // JWT Middleware
 
 // User Set
 apiRouter.use((req, res, next) => {
