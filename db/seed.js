@@ -21,7 +21,8 @@ const {
   updatePost,
   getAllPosts,
   getAllTags,
-  getPostsByTagName
+  getPostsByTagName,
+  getUserByUsername,
 } = require('./index');
 
 // Step 2: User Methods
