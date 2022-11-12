@@ -2,7 +2,9 @@ const express = require('express');
 
 // Router Imports
 const apiRouter = express.Router();
+const postsRouter = require('./posts')
 const usersRouter = require('./users');
+const tagsRouter = require('./tags');
 
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
@@ -39,7 +41,9 @@ apiRouter.use(async (req, res, next) => {
     }
   });
 
-  // Middleware
+  // JWT Middleware
+
+// User Set
 apiRouter.use((req, res, next) => {
   if (req.user) {
     console.log("User is set:", req.user);
@@ -48,15 +52,17 @@ apiRouter.use((req, res, next) => {
   next();
 });
   
-  // Routers are below
-
-  // Router above
-  apiRouter.use((error, req, res, next) => {
+// Routers
+apiRouter.use('/users', usersRouter);
+apiRouter.use('/posts', postsRouter);
+apiRouter.use('/tags', tagsRouter)
+apiRouter.use((error, req, res, next) => {
     res.send({
       name: error.name,
       message: error.message
     });
   });
+
 
 // Export
 module.exports = apiRouter;

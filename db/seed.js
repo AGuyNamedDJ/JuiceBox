@@ -27,7 +27,7 @@ const {
 
 // Step 2: User Methods
   
-    // Method: dropTables
+    // Method: dropTables, must come before createTables
 async function dropTables() {
   try {
     console.log("Starting to drop tables...");
