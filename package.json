@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed:dev": "nodemon ./db/seed.js",
-    "start": "node bin/seed.js",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
     "build": "webpack",
-    "seed": "node./bin/seed",
-    "start:dev": "nodemon index.js"
+    "seed-and-start": "node db/seed.js && node index.js"
   },
   "repository": {
     "type": "git",
