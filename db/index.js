@@ -4,7 +4,8 @@
 // Step 1: Import pg from the dependency from index.js
 const { Client } = require('pg');
 // Step 2: Create a new pg.Client
-const client = new Client('postgres://localhost:5432/juicebox-dev'); 
+const client = new pg.Client(process.env.DB_URL || 'postgres://localhost:5432/juicebox-dev'); 
+  // This allows us to use an environemnt variable to hold our deployed DB url, but it makes sure that we can still test locally on localhost.
  // Step 3: Helper Functions
 
      // FN: createUser
