@@ -33,17 +33,17 @@ server.use((req, res, next) => {
   });
 
   // API
-  app.use('/api', (req, res, next) => {
-    console.log("A request was made to /api");
-    next();
-  });
+  // app.use('/api', (req, res, next) => {
+  //   console.log("A request was made to /api");
+  //   next();
+  // });
   
-  app.get('/api', (req, res, next) => {
-    console.log("A get request was made to /api");
-    res.send({ message: "success" });
-  });
+  // app.get('/api', (req, res, next) => {
+  //   console.log("A get request was made to /api");
+  //   res.send({ message: "success" });
+  // });
 
-  server.use("/api", apiRouter);
+  // server.use("/api", apiRouter);
 
 // Background Color Route
   server.get('/background/:color', (req, res, next) => {
