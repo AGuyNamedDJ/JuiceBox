@@ -9,7 +9,7 @@
     "start": "node index.js",
     "start:dev": "nodemon index.js",
     "build": "webpack",
-    "seed-and-start": "node db/seed.js && node index.js",
+    "seed-and-start": "node db/seed.js && node index.js"
   },
   "repository": {
     "type": "git",
