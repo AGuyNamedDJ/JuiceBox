@@ -44,7 +44,7 @@ async function dropTables() {
     console.log("Finished dropping tables!");
   } catch (error) {
     console.error("Error dropping tables!");
-    throw error;
+    console.error(error);
   }
 }
 
@@ -86,7 +86,7 @@ async function createTables() {
     console.log("Finished building tables!");
   } catch (error) {
     console.error("Error building tables!");
-    throw error;
+    console.error(error);
   }
 }
 
@@ -117,7 +117,7 @@ async function createInitialUsers() {
     console.log("Finished creating users!");
   } catch (error) {
     console.error("Error creating users!");
-    throw error;
+    console.error(error);
   }
 }
 
@@ -150,7 +150,7 @@ async function createInitialPosts() {
     console.log("Finished creating posts!");
   } catch (error) {
     console.log("Error creating posts!");
-    throw error;
+    console.error(error);
   }
 }
 
@@ -218,7 +218,7 @@ async function testDB() {
     console.log("Finished database tests!");
   } catch (error) {
     console.log("Error during testDB");
-    throw error;
+    console.error(error);
   }
 }
 

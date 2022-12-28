@@ -25,7 +25,7 @@ async function createUser({
 
     return user;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -51,7 +51,7 @@ async function updateUser(id, fields = {}) {
 
     return user;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -65,7 +65,7 @@ async function getAllUsers() {
 
     return rows;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -86,7 +86,7 @@ async function getUserById(userId) {
 
     return user;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -101,7 +101,7 @@ async function getUserByUsername(username) {
 
     return user;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -123,7 +123,7 @@ async function createPost({
 
     return await addTagsToPost(post.id, tagList);
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -173,7 +173,7 @@ async function updatePost(postId, fields = {}) {
 
     return await getPostById(postId);
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -191,7 +191,7 @@ async function getAllPosts() {
 
     return posts;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -231,7 +231,7 @@ async function getPostById(postId) {
 
     return post;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -250,7 +250,7 @@ async function getPostsByUser(userId) {
 
     return posts;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -269,7 +269,7 @@ async function getPostsByTagName(tagName) {
       post => getPostById(post.id)
     ));
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 } 
 
@@ -304,7 +304,7 @@ async function createTags(tagList) {
 
     return rows;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -317,7 +317,7 @@ async function createPostTag(postId, tagId) {
       ON CONFLICT ("postId", "tagId") DO NOTHING;
     `, [postId, tagId]);
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -332,7 +332,7 @@ async function addTagsToPost(postId, tagList) {
 
     return await getPostById(postId);
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
@@ -346,7 +346,7 @@ async function getAllTags() {
 
     return { rows }
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 }
 
