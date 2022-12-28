@@ -157,6 +157,7 @@ async function createInitialPosts() {
 // Method: rebuildDB
 async function rebuildDB() {
   try {
+    console.log("Starting to rebuild:")
     client.connect();
 
     await dropTables();
@@ -165,7 +166,7 @@ async function rebuildDB() {
     await createInitialPosts();
   } catch (error) {
     console.log("Error during rebuildDB")
-    throw error;
+    console.error(error);
   }
 }
 
